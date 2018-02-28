@@ -7,9 +7,10 @@ import java.util.Random;
 
 public class IOMultiThreadedWorkload extends Thread {
 
+	//TODO: Delete file upon finishing writeIntoFile while loop
+	
 	int x = 1;
-	long durationInMilliSeconds = 1000;
-	final int RUNS_AMOUNT = 1000;
+	long durationInMilliSeconds = 0;
 	boolean isActive = false;
 	RandomAccessFile raf;
 	String tempPath = new String(System.getProperty("java.io.tmpdir"));
@@ -17,8 +18,7 @@ public class IOMultiThreadedWorkload extends Thread {
 	String fileName = "randomtext_" + x + ".txt";
 	String pathAndFileName = tempPath + "\\" + fileName;
 	String mode;
-	File fileObject;
-
+	
 	public void run() {
 		try {
 			writeIntoFile();
@@ -32,9 +32,10 @@ public class IOMultiThreadedWorkload extends Thread {
 	public IOMultiThreadedWorkload(int x, long durationInSeconds) throws IOException {
 		try {
 			setX(x + 1);
-			setMode("rws");
+			setMode("rw");
 			setFileName("randomtext");
 			setDurationInSeconds(durationInSeconds);
+			isActive = true;
 			System.out.println("Creating and filling file now: " + this.pathAndFileName);
 			raf = new RandomAccessFile(pathAndFileName, mode);
 		} catch (IOException ioE) {
@@ -46,9 +47,10 @@ public class IOMultiThreadedWorkload extends Thread {
 	public IOMultiThreadedWorkload(String fileName, int x, long durationInSeconds) throws IOException {
 		try {
 			setX(x + 1);
-			setMode("rws");
+			setMode("rw");
 			setFileName(fileName);
 			setDurationInSeconds(durationInSeconds);
+			isActive = true;
 			System.out.println("Creating and filling file now: " + this.pathAndFileName);
 			raf = new RandomAccessFile(pathAndFileName, mode);
 		} catch (IOException ioE) {
@@ -139,18 +141,26 @@ public class IOMultiThreadedWorkload extends Thread {
 	private void writeIntoFile() throws IOException {
 		long startTime = System.currentTimeMillis();
 		long endTime = startTime + durationInMilliSeconds;
-		long resetTimerInMillis = 20000;
-		isActive = true;
+		long counter = 0;
+		File fileToDelete;
 		
 		while(System.currentTimeMillis() < endTime) {
 			raf.getFilePointer();
 			raf.writeUTF(generateString());
-			//System.out.println("Current time: " + System.currentTimeMillis());
-			//System.out.println("End time: " + endTime);
-			if(System.currentTimeMillis() - startTime >= resetTimerInMillis) {
+			counter++;
+			if(counter > 1000) {
 				raf.seek(0);
+				counter = 0;
 			}
 		}
+			// Not working yet
+			for(int i = x; i > 0; i--) {
+				setX(i);
+				setFileName(fileName);
+				setPathAndFileName();
+				fileToDelete = new File(pathAndFileName);
+				fileToDelete.delete();
+			}
 		//System.out.println("Der Durchgang ging: " + (endTime - startTime) / 1000 + " Sekunden.");
 		isActive = false;
 	}

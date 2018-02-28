@@ -13,8 +13,8 @@ import java.io.IOException;
 
 public class IOStrain extends Thread{
 
-	int filesToCreate = 100;
-	long durationInSeconds = 10;
+	int filesToCreate;
+	long durationInSeconds;
 	IOMultiThreadedWorkload iomtw;
 	Thread t;
 	
@@ -27,7 +27,7 @@ public class IOStrain extends Thread{
 			}
 			iomtw.progressDots();
 			t.join();
-			System.out.println("IOLoad beendet!");
+			System.out.printf("%n%nIOLoad beendet!");
 			System.exit(0);
 			//iomtw.deleteTemporaryFiles();
 		} catch (IOException iex) {
@@ -39,22 +39,26 @@ public class IOStrain extends Thread{
 	}
 	
 	public void setAmountOfFilesToCreate(int amount) {
-		if(amount == 0) {
+		/*if(amount == 0) {
 			this.filesToCreate = 1;
 		}
 		else if(amount >= 1) {
 			this.filesToCreate = amount;
-		}
+		}*/
+		
+		this.filesToCreate = amount;
 	}
 	
 	public void setDurationInSeconds(long durationInSeconds) {
 		//Duplicate: checks for same parameters in IOMultiThreadedWorkload
-		if(durationInSeconds > 1 && durationInSeconds < 10800) {
+		/*if(durationInSeconds > 1 && durationInSeconds < 10800) {
 			this.durationInSeconds = durationInSeconds;
 		}
 		else {
 			System.out.println("Fehlerhafte Eingabe. Setze Durchlaufzeit auf 10 Sekunden!");
 			this.durationInSeconds = 10;
-		}
+		}*/
+		
+		this.durationInSeconds = durationInSeconds;
 	}
 }
