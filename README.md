@@ -3,7 +3,7 @@ A collection of console based tools to simulate synthetic load on CPU, RAM and D
 
 Note: Requires Java Runtime Environment
 
-Disclaimer: This tool may lower the lifespan of system hardware.Execution of the tools under own responsibility. I will not assume any responsibility or liability for any hardware damages.
+Disclaimer: This tool may lower the lifespan of system hardware. Execution under own responsibility. I will not assume any responsibility or liability for any hardware damages.
 
 
 Latest Changelog: 
