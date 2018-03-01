@@ -15,7 +15,7 @@ public class Main {
 		int rechnungsDurchlaeufe;
 		
 		//User-Input: Number of logical CPU cores that should be used
-		System.out.printf("Bitte Anzahl der zu verwendenden logischen CPU-Kerne eingeben: ");
+		System.out.printf("Bitte Anzahl der zu verwendenden, logischen CPU-Kerne eingeben: ");
 		anzahlThreads = reader.nextInt();
 		System.out.printf("%nBitte Durchführungszeitraum (in Sekunden) festlegen: ");
 		rechnungsDurchlaeufe = reader.nextInt();

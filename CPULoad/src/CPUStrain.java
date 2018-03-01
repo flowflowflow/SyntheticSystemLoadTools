@@ -24,7 +24,9 @@ public class CPUStrain extends Thread {
 	public CPUStrain() {
 		anzahlThreads = rt.availableProcessors();
 		rechnungsDurchlaeufe = 120;
-		System.out.printf("%d logische CPU-Kerne erkannt%n%n", anzahlThreads);
+		System.out.printf("%n========  CPULoad v1.0 ========%n%n");
+		System.out.printf("%d logische CPU-Kerne erkannt", anzahlThreads);
+		System.out.printf("%n%n===============================%n%n");
 	}
 	
 	public CPUStrain(int anzahlThreads) {
@@ -35,7 +37,7 @@ public class CPUStrain extends Thread {
 		else {
 			this.anzahlThreads = anzahlThreads;
 		}
-		System.out.printf("%d logische CPU-Kerne werden verwendet%n%n", anzahlThreads);
+		System.out.printf("%%d logische CPU-Kerne werden verwendet%n%n", anzahlThreads);
 	}
 	
 	public void setRuns(int rechnungsDurchlaeufe) {
@@ -58,7 +60,7 @@ public class CPUStrain extends Thread {
 	public void run() {
 		
 		System.out.printf(getRuns());
-		System.out.printf("%nStarte MultiThreadBerechnung mit %d Threads:%n%n", anzahlThreads);
+		System.out.printf("%nStarte Berechnung mit %d Threads:%n%n", anzahlThreads);
 		
 		/*
 		 * Initialisiert und startet eine zuvor festgelegte Anzahl
@@ -86,7 +88,7 @@ public class CPUStrain extends Thread {
 				break;
 			}
 			System.out.printf(
-					"[%d. Durchlauf] MultiThreadBerechnungen pro Sekunde: %d (%.2f pro Thread)\n"
+					"[%d. Durchlauf] Berechnungen pro Sekunde: %d (%.2f pro Thread)\n"
 					, i+1, zaehler.longValue(), (double) (zaehler.longValue()) / anzahlThreads);
 		}
 		

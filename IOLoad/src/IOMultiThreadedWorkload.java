@@ -9,6 +9,7 @@ import java.util.Random;
 
 public class IOMultiThreadedWorkload extends Thread {
 
+	//TODO: Delete file upon finishing writeIntoFile while loop
 	final String fs = File.separator;
 	
 	int x = 1;
