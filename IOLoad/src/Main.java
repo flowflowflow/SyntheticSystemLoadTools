@@ -17,6 +17,6 @@ public class Main {
 		
 		ios.setAmountOfFilesToCreate(fileAmount);
 		ios.setDurationInSeconds(durationInSeconds);
-		ios.start();		
+		ios.start();
 	}
 }

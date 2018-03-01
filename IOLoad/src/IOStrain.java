@@ -15,6 +15,7 @@ public class IOStrain extends Thread{
 
 	int filesToCreate;
 	long durationInSeconds;
+	long elapsedTimeInSeconds = 0;
 	IOMultiThreadedWorkload iomtw;
 	Thread t;
 	
@@ -27,7 +28,8 @@ public class IOStrain extends Thread{
 			}
 			iomtw.progressDots();
 			t.join();
-			System.out.printf("%n%nIOLoad beendet!");
+			elapsedTimeInSeconds = iomtw.getElapsedTime();
+			System.out.printf("%n%nIOLoad beendet! (" + elapsedTimeInSeconds + " Sekunden)");
 			System.exit(0);
 			//iomtw.deleteTemporaryFiles();
 		} catch (IOException iex) {
@@ -50,15 +52,6 @@ public class IOStrain extends Thread{
 	}
 	
 	public void setDurationInSeconds(long durationInSeconds) {
-		//Duplicate: checks for same parameters in IOMultiThreadedWorkload
-		/*if(durationInSeconds > 1 && durationInSeconds < 10800) {
-			this.durationInSeconds = durationInSeconds;
-		}
-		else {
-			System.out.println("Fehlerhafte Eingabe. Setze Durchlaufzeit auf 10 Sekunden!");
-			this.durationInSeconds = 10;
-		}*/
-		
 		this.durationInSeconds = durationInSeconds;
 	}
 }
