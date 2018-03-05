@@ -29,7 +29,8 @@ public class IOStrain extends Thread{
 			iomtw.progressDots();
 			t.join();
 			elapsedTimeInSeconds = iomtw.getElapsedTime();
-			System.out.printf("%n%nIOLoad beendet! (" + elapsedTimeInSeconds + " Sekunden)");
+			System.out.printf("%n%nIOLoad beendet! (Dauer: " + elapsedTimeInSeconds + " Sekunden)");
+			System.out.printf("%n%nIOLoad finished! (Elapsed time: " + elapsedTimeInSeconds + " Seconds)");
 			System.exit(0);
 			//iomtw.deleteTemporaryFiles();
 		} catch (IOException iex) {
@@ -41,17 +42,22 @@ public class IOStrain extends Thread{
 	}
 	
 	public void setAmountOfFilesToCreate(int amount) {
-		/*if(amount == 0) {
+		if(amount < 1 || amount > 1000) {
 			this.filesToCreate = 1;
+			System.err.printf("Error: invalid amount entered.%nSetting amount to " + this.filesToCreate);
 		}
-		else if(amount >= 1) {
+		else {
 			this.filesToCreate = amount;
-		}*/
-		
-		this.filesToCreate = amount;
+		}
 	}
 	
 	public void setDurationInSeconds(long durationInSeconds) {
-		this.durationInSeconds = durationInSeconds;
+		if(durationInSeconds > 0 && durationInSeconds < 10800) {
+			this.durationInSeconds = durationInSeconds;
+		}
+		else {
+			this.durationInSeconds = 600;
+			System.out.printf("Fehlerhafte Zeitangabe%nSetze Durchlaufszeit auf 10 Minuten");
+		}
 	}
 }

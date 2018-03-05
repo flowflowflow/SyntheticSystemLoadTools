@@ -8,7 +8,7 @@ import java.io.File;
 import java.util.Random;
 
 public class IOMultiThreadedWorkload extends Thread {
-	
+
 	final String fs = File.separator;
 	
 	int x = 1;
@@ -19,7 +19,7 @@ public class IOMultiThreadedWorkload extends Thread {
 	RandomAccessFile raf;
 	String tempPath = new String(System.getProperty("java.io.tmpdir"));
 	String defaultPath = tempPath;
-	String fileName = "dummyfile_" + x + ".txt";
+	String fileName = "log_dummy_";
 	String pathAndFileName = tempPath + fs + fileName;
 	String mode;
 	
@@ -29,17 +29,16 @@ public class IOMultiThreadedWorkload extends Thread {
 		try {
 			writeIntoFile();
 		} catch (IOException ie) {
-			System.err.println("Fehler: " + ie);
+			System.err.println("Fehler / Error: " + ie);
 			System.exit(0);
-		} /* catch(InterruptedException intexc) { System.exit(1); }
-		   */
+		}
 	}
 
 	public IOMultiThreadedWorkload(int x, long durationInSeconds) throws IOException {
 		try {
 			setX(x + 1);
 			setMode("rw");
-			setFileName("dummyfile");
+			setFileName(fileName);
 			setDurationInSeconds(durationInSeconds);
 			isActive = true;
 			System.out.println("Creating and filling file now: " + this.pathAndFileName);
@@ -83,14 +82,7 @@ public class IOMultiThreadedWorkload extends Thread {
 
 	//Duration in seconds 
 	public void setDurationInSeconds(long durationInSeconds) {
-		if(durationInSeconds > 0 && durationInSeconds < 10800) {
-			this.durationInMilliSeconds = durationInSeconds*1000;
-		}
-		else {
-			this.durationInMilliSeconds = 600 * 1000;
-			System.out.println("Fehlerhafte Durchlaufszeitangabe");
-			System.out.println("Setze Durchlaufszeit auf 10 Minuten");
-		}
+		this.durationInMilliSeconds = durationInSeconds * 1000;
 	}
 	
 	//RandomAccessFile mode
@@ -133,6 +125,8 @@ public class IOMultiThreadedWorkload extends Thread {
 	}
 	
 	public void progressDots() {
+		System.out.printf("%n");
+		System.out.print("Running");
 		while(isActive) {
 			try {
 			System.out.print(".");
@@ -170,7 +164,6 @@ public class IOMultiThreadedWorkload extends Thread {
 		raf.close();
 		isActive = false;
 		deleteGeneratedFiles();	
-		//System.out.println("Der Durchgang ging: " + (endTime - startTime) / 1000 + " Sekunden.");
 	}
 
 	private String generateString() {
@@ -179,7 +172,6 @@ public class IOMultiThreadedWorkload extends Thread {
 		String generatedString = new String(array, Charset.forName("UTF-8"));
 		return generatedString;
 	}
-	
 	
 	//Not yet working
 	private void deleteGeneratedFiles() {
