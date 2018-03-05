@@ -8,9 +8,16 @@ Disclaimer: This tool may lower the lifespan of system hardware. Execution under
 
 Latest Changelog: 
 
-  - Now also deletes the generated temporary files. Working on Windows 7, untested on any other platform yet. 
+  March 5th, 2018:
+  
+    - Added English console output.
+
+  March 1st, 2018:
+  
+    - Now also deletes the generated temporary files. Working on Windows 7, untested on any other platform yet. 
     (If not working, the dummy files are stored in the temporary directory of your OS. Deletion of those is safe.)
-  - CPULoad console output tidied up.
+    
+    - CPULoad console output tidied up.
   
 HOW TO RUN:
 
